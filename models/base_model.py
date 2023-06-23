@@ -12,7 +12,6 @@ if models.storage_t == "db":
 else:
     Base = object
 
-
 class BaseModel(Base):
     """A base class for all hbnb models"""
     id = Column(String(60), nullable=False, primary_key=True)
@@ -32,8 +31,8 @@ class BaseModel(Base):
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
-            del kwargs['__class__']
             self.__dict__.update(kwargs)
+            del self.__dict__['__class__']
 
     def __str__(self):
         """Returns a string representation of the instance"""
