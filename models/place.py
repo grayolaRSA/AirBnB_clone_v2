@@ -11,9 +11,9 @@ class Place(BaseModel, Base):
 
     __tablename__ = 'places'
 
-    if models.storage_t = "db":
-        city_id = Column(String(60), nullable=False, ForeignKey('cities.id'))
-        user_id = Column(String(60), nullable=False. ForeignKey('users.id'))
+    if models.storage_t == "db":
+        city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(128), nullable=False)
         description = Column(String(1024), nullable=False)
         number_rooms = Column(int, nullable=False, default=0)
@@ -47,14 +47,14 @@ class Place(BaseModel, Base):
         amenity_ids = []
 
     @property
-    def reviews(self)
-    "getter for list of instances related to the place"
-    places_list = []
-    all_places = models.storage.all(Place)
-    for places in all_places.values():
-        if places.place_id = self.id:
-            places_list.append(places)
-            return places_list
+    def reviews(self):
+        "getter for list of instances related to the place"
+        places_list = []
+        all_places = models.storage.all(Place)
+        for places in all_places.values():
+            if places.place_id in self.id:
+                places_list.append(places)
+                return places_list
 
     @property
     def amenities(self):
@@ -62,7 +62,7 @@ class Place(BaseModel, Base):
         amenities_list = []
         all_amenities = models.storage.all(Amenity)
         for amenity in all_amenities.values():
-            if amenity.amenity_ids = self.id:
+            if amenity.amenity_ids in self.id:
                 amenities_list.append(amenities)
                 return amenities_list
 
