@@ -2,11 +2,15 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey
+from models.amenity import Amenity
+import models
 
 
 class Place(BaseModel, Base):
     """ A place to stay """
+
     __tablename__ = 'places'
+
     if models.storage_t = "db":
         city_id = Column(String(60), nullable=False, ForeignKey('cities.id'))
         user_id = Column(String(60), nullable=False. ForeignKey('users.id'))
@@ -20,6 +24,15 @@ class Place(BaseModel, Base):
         longitude = Column(float, nullable=False)
         reviews = relationship("Review", cascade="all, delete",
                                backref="place")
+        amenities = relationship("Amenity", secondary="place_amenity",
+                                 viewonly=False)
+        place_amenity = Table('place_amenity', Base.metadata,
+                              Column('place_id', String(60),
+                                     ForeignKey('places.id'), nullable=False,
+                                     primary_key=True),
+                              Column('amenity_id', String(60),
+                                     ForeignKey('amenities.id'),
+                                     nullable=False, primary_key=True))
     else:
         city_id = ""
         user_id = ""
@@ -32,12 +45,30 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
-        @setter
-        def reviews(self)
-        "getter for list of instances related to the place"
-        places_list = []
-        all_places = models.storage.all(Place)
-        for places in all_places.values():
-            if places.place_id = self.id:
-                places_list.append(places)
-                return places_list
+
+    @property
+    def reviews(self)
+    "getter for list of instances related to the place"
+    places_list = []
+    all_places = models.storage.all(Place)
+    for places in all_places.values():
+        if places.place_id = self.id:
+            places_list.append(places)
+            return places_list
+
+    @property
+    def amenities(self):
+        """getter attribute for amenities"""
+        amenities_list = []
+        all_amenities = models.storage.all(Amenity)
+        for amenity in all_amenities.values():
+            if amenity.amenity_ids = self.id:
+                amenities_list.append(amenities)
+                return amenities_list
+
+    @amenities.setter
+    def amenities(self):
+        """setter for appending Amenity.id to amenity_ids"""
+        if isinstance(amenity, Amenity):
+            if amenity.id not in self.amenity_ids:
+                self.amenity_ids.append(amenity.id)
