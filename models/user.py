@@ -4,12 +4,13 @@ from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+import models
 
 
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     __tablename__ = 'users'
-    if models.storage_t = "db":
+    if models.storage_t == "db":
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
         first_name = Column(String(128))
