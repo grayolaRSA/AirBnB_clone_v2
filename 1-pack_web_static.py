@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-# Fabric script to create tar archive of web static folder
+"""
+Fabric script to create tar archive of web static folder
+"""
 
 from fabric.api import local
 from datetime import datetime
@@ -7,7 +9,7 @@ import os
 
 
 def do_pack():
-    # Create "versions" directory if not present
+    """Create "versions" directory if not present"""
     new_directory = "versions"
     if not os.path.exists(new_directory):
         os.mkdir(new_directory)
