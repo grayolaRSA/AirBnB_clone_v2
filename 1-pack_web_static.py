@@ -21,7 +21,7 @@ def do_pack():
     archive_file = f"{new_directory}/web_static_{current_date}.tgz"
 
     # Create the compressed archive using the "tar" command
-    command = f"tar -czvf {archive_file} web_static"
+    command = local("tar -czvf {} web_static".format(archive_file))
     result = local(command)
 
     # Check if the archive has been correctly generated
