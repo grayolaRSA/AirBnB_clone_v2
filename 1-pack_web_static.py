@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# module for fabric script that creates tar archive
+
 from fabric.api import run
 from datetime import datetime
 import tarfile
@@ -31,4 +34,3 @@ def do_pack():
     archive_size = os.path.getsize(archive_file)
 
     print(f"web_static packed: {archive_file} -> {archive_size} bytes")
-    print("\nDone.")
