@@ -3,6 +3,7 @@
 Contains the class DBStorage
 """
 
+import models  # Import models here to avoid circular import issue
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from models.city import City
@@ -14,7 +15,7 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-import models  # Import models here to avoid circular import issue
+
 
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
