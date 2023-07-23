@@ -27,10 +27,9 @@ def pythoniscool(text='is cool'):
     return 'Python ' + text.replace('_', ' ')
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def pythoniscool():
+def isanumber(n):
     """displays statement only if integer input received"""
-    return '{:d} is a number'.format(n)
-
+    return f'{n} is a number'
 
 if __name__ == '__main__':
     # Change the host parameter from '127.0.0.1' to '0.0.0.0'
