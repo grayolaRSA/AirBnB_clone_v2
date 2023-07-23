@@ -34,7 +34,8 @@ class Place(BaseModel, Base):
                                      ForeignKey('amenities.id'),
                                      nullable=False, primary_key=True))
         amenities = relationship("Amenity", secondary="place_amenity",
-                                 viewonly=False, back_populates='amenities')
+                                 viewonly=False,
+                                 back_populates='place_amenities')
 
     else:
         city_id = ""
