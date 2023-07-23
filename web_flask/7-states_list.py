@@ -48,11 +48,13 @@ def number_odd_or_even(n):
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
-    return render_template('7-states_list.html')
+    """displays HTML page with sorted list of states with ID"""
+    states = sorted(list(storage.all("State").values()), key=lambda x: x.name)
+    return render_template('7-states_list.html', states=states)
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(exception):
     """ handles teardown of app"""
     storage.close()
 
