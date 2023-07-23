@@ -3,7 +3,7 @@
 Contains the class DBStorage
 """
 
-import models  # Import models here to avoid circular import issue
+import models
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from models.city import City

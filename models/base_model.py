@@ -3,15 +3,9 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
-if __name__ == '__main__':
-    from models import storage
+Base = declarative_base()
 
-    if models.storage_t == "db":
-        Base = declarative_base()
-    else:
-        Base = object
-
-        time = "%Y-%m-%dT%H:%M:%S.%f"
+time = "%Y-%m-%dT%H:%M:%S.%f"
 
 class BaseModel:
     """A base class for all hbnb models"""
@@ -48,6 +42,7 @@ class BaseModel:
     def save(self):
         """Updates updated_at with current time when instance is changed"""
         if __name__ == '__main__':
+            from models import storage
             storage.new(self)
             storage.save()
         else:
