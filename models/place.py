@@ -7,7 +7,7 @@ import models
 from os import getenv
 from sqlalchemy.orm import relationship
 
-if models.storage_t = 'db':
+if models.storage_t == 'db':
     place_amenity = Table('place_amenity', Base.metadata,
                           Column('place_id', String(60),
                                  ForeignKey('places.id'), nullable=False,
