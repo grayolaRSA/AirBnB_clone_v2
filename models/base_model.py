@@ -65,3 +65,8 @@ class BaseModel:
             dictionary['updated_at'] = self.updated_at.isoformat()
         dictionary.pop('_sa_instance_state', None)
         return dictionary
+
+        def delete(self):
+        """delete the current instance from the storage"""
+        from models import storage
+        storage.delete(self)
