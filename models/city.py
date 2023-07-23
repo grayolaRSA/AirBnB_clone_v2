@@ -14,6 +14,7 @@ class City(BaseModel, Base):
     __tablename__ = 'cities'
 
     if models.storage_t == "db":
+        id = Column(String(60), primary_key=True, nullable=False)
         name = Column(String(128), nullable=False)
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
         places = relationship("Place", cascade="all, delete", backref="city")

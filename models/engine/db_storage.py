@@ -48,13 +48,6 @@ class DBStorage:
         new_dict = {}
         if cls:
             for clss in classes.values():
-                if issubclass(cls, clss):
-                    objs = self.__session.query(clss).all()
-                    for obj in objs:
-                        key = obj.__class__.__name__ + '.' + obj.id
-                        new_dict[key] = obj
-        else:
-            for clss in classes.values():
                 objs = self.__session.query(clss).all()
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
