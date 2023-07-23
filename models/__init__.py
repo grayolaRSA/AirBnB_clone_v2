@@ -3,18 +3,15 @@
 initialize the models package
 """
 
+from models.engine.db_storage import DBStorage
+from models.engine.file_storage import FileStorage
 from os import getenv
 
-def init_storage():
-    """Initialize the storage based on the environment variable"""
-    storage_t = getenv("HBNB_TYPE_STORAGE")
+storage_t = getenv("HBNB_TYPE_STORAGE")
 
-    if storage_t == "db":
-        from models.engine.db_storage import DBStorage
-        return DBStorage()
-    else:
-        from models.engine.file_storage import FileStorage
-        return FileStorage()
+if storage_t == "db":
+    storage = DBStorage()
+else:
+    storage = FileStorage()
 
-storage = init_storage()
 storage.reload()
