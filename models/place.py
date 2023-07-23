@@ -50,9 +50,6 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    def __init__(self, *args, **kwargs):
-        """initializes Place"""
-        super().__init__(*args, **kwargs)
 
     if models.storage_t != 'db':
         @property
@@ -84,3 +81,7 @@ class Place(BaseModel, Base):
             if isinstance(amenity, Amenity):
                 if amenity.id not in self.amenity_ids:
                     self.amenity_ids.append(amenity.id)
+
+        def __init__(self, *args, **kwargs):
+            """initializes Place"""
+            super().__init__(*args, **kwargs)
