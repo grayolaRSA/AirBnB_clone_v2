@@ -8,10 +8,12 @@ from os import getenv
 from sqlalchemy.orm import relationship
 
 
+
 class Place(BaseModel, Base):
     """ A place to stay """
 
     __tablename__ = 'places'
+
 
     if models.storage_t == "db":
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -51,12 +53,12 @@ class Place(BaseModel, Base):
     @property
     def reviews(self):
         "getter for list of instances related to the place"
-        places_list = []
-        all_places = models.storage.all(Place)
-        for places in all_places.values():
-            if places.place_id in self.id:
-                places_list.append(places)
-                return places_list
+        reviews_list = []
+        all_reviews = models.storage.all(Review)
+        for review in all_reviews.values():
+            if review.place_id == self.id:
+                reviews_list.append(review)
+        return reviews_list
 
     @property
     def amenities(self):
@@ -64,12 +66,12 @@ class Place(BaseModel, Base):
         amenities_list = []
         all_amenities = models.storage.all(Amenity)
         for amenity in all_amenities.values():
-            if amenity.amenity_ids in self.id:
-                amenities_list.append(amenities)
-                return amenities_list
+            if amenity.id in self.amenity_ids:
+                amenities_list.append(amenity)
+        return amenities_list
 
     @amenities.setter
-    def amenities(self):
+    def amenities(self, amenity):
         """setter for appending Amenity.id to amenity_ids"""
         if isinstance(amenity, Amenity):
             if amenity.id not in self.amenity_ids:
