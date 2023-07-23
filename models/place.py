@@ -53,6 +53,7 @@ class Place(BaseModel, Base):
     @property
     def reviews(self):
         "getter for list of instances related to the place"
+        from models.review import Review
         reviews_list = []
         all_reviews = models.storage.all(Review)
         for review in all_reviews.values():
@@ -63,6 +64,7 @@ class Place(BaseModel, Base):
     @property
     def amenities(self):
         """getter attribute for amenities"""
+        from models.amenity import Amenity
         amenities_list = []
         all_amenities = models.storage.all(Amenity)
         for amenity in all_amenities.values():
@@ -73,6 +75,7 @@ class Place(BaseModel, Base):
     @amenities.setter
     def amenities(self, amenity):
         """setter for appending Amenity.id to amenity_ids"""
+        from models.amenity import Amenity
         if isinstance(amenity, Amenity):
             if amenity.id not in self.amenity_ids:
                 self.amenity_ids.append(amenity.id)
