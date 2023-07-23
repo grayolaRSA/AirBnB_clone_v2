@@ -2,7 +2,7 @@
 """ State Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models.city import City
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 import models
 
@@ -17,6 +17,10 @@ class State(BaseModel, Base):
     else:
         name = ""
 
+    def __init__(self, *args, **kwargs):
+        """Initialize State instance"""
+        super().__init__(*args, **kwargs)
+
     if models.storage_t != "db":
         @property
         def cities(self):
@@ -27,7 +31,3 @@ class State(BaseModel, Base):
                 if city.state_id == self.id:
                     city_list.append(city)
             return city_list
-
-        def __init__(self, *args, **kwargs):
-            """Initialize State instance"""
-            super().__init__(*args, **kwargs)
