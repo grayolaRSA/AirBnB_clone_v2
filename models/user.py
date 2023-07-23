@@ -12,14 +12,15 @@ class User(BaseModel, Base):
     """class for users"""
 
     __tablename__ = 'users'
+    if models.storage_t == "db":
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
-
-    if models.storage_t == "db":
-        places = relationship("Place", cascade="all, delete-orphan",
+    places = relationship("Place", cascade="all, delete-orphan",
                               backref="user")
+    reviews = relationship("Review", cascade="all, delete-orphan",
+                          backref="user")
     else:
         email = ""
         password = ""
