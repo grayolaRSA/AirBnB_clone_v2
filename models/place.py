@@ -26,8 +26,6 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", cascade="all, delete",
                                backref="place")
-        amenities = relationship("Amenity", secondary="place_amenity",
-                                 viewonly=False)
         place_amenity = Table('place_amenity', Base.metadata,
                               Column('place_id', String(60),
                                      ForeignKey('places.id'), nullable=False,
@@ -35,6 +33,8 @@ class Place(BaseModel, Base):
                               Column('amenity_id', String(60),
                                      ForeignKey('amenities.id'),
                                      nullable=False, primary_key=True))
+        amenities = relationship("Amenity", secondary="place_amenity",
+                                 viewonly=False, back_populates='amenities')
 
     else:
         city_id = ""

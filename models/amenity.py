@@ -15,7 +15,7 @@ class Amenity(BaseModel, Base):
     if models.storage_t == "db":
         name = Column(String(128), nullable=False)
         place_amenities = relationship("Place", secondary="place_amenity",
-                                       backref="amenities",
+                                       back_populates="amenities",
                                        viewonly=False)
     else:
         name = ""
