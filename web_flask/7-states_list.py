@@ -66,6 +66,6 @@ def teardown(exception):
     """ handles teardown of app"""
     storage.close()
 
-    if __name__ == '__main__':
-        # Change the host parameter from '127.0.0.1' to '0.0.0.0'
-        app.run(host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    # Change the host parameter from '127.0.0.1' to '0.0.0.0'
+    app.run(host='0.0.0.0', port=5000)
